@@ -22,7 +22,7 @@ const CombineForm = ({ rules }) => {
     const combinedRuleString = `${rule1} ${operator} ${rule2}`;
 
     try {
-      const response = await axios.post('http://localhost:5000/api/rules/create', {
+      const response = await axios.post('https://rule-engine-with-ast-2-myl2.onrender.com/api/rules/create', {
         ruleString: combinedRuleString,
       });
       setMessage(`Rules combined and submitted: ${response.data.message}`);
