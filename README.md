@@ -25,7 +25,10 @@ Before running the project, ensure you have the following installed on your syst
    ```bash
    git clone https://github.com/Shresth941/Rule-Engine-with-AST.git
    cd Rule-Engine-with-AST
-Install dependencies:
+
+
+   
+**Install dependencies:**
 
 Install frontend dependencies:
 npm install
@@ -40,7 +43,11 @@ In the backend directory, create a .env file and add your MongoDB Atlas connecti
 
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority
 Running the Application
-Start the Frontend
+
+
+
+
+**Start the Frontend**
 In the project’s root directory, start the frontend with:
 
 
@@ -50,7 +57,9 @@ npm start
 
 This will run the React application at http://localhost:3000.
 
-Start the Backend
+
+
+**Start the Backend**
 
 
 Navigate to the backend directory and start the Node.js server:
@@ -59,7 +68,7 @@ Navigate to the backend directory and start the Node.js server:
 npm run server
 Ensure that your backend connects to MongoDB Atlas successfully.
 
-Usage
+**Usage**
 After starting both the frontend and backend, you can access the application by visiting http://localhost:3000 in your browser. From here, you can perform the following actions:
 
 Create New Rules: Define and store custom rules using a user-friendly form interface.
@@ -68,21 +77,33 @@ Visualize Rules: Navigate to the rule visualization section to see your rules di
 
 
 
-Example Usage:
+**Example Usage:**
 Creating a Rule: Fill in the criteria in the rule creation form and save the rule to the database.
 Evaluating Data: Input data or upload a file, and the engine will process it to check against the saved rules.
 Visualizing Rules: Use the tree-based view to explore how rules are connected and modify them as needed.
 Ensure the backend is running and MongoDB Atlas is connected for full functionality.
 
-Technologies Used
-Frontend:
+**Technologies Used**
+
+
+**Frontend:**
 React: For building the user interface.
-Backend:
+
+
+
+**Backend:**
 Node.js: Server-side JavaScript runtime.
 Express: Web framework for handling HTTP requests.
-Database:
+
+
+
+
+**Database:**
 MongoDB Atlas: Cloud-based NoSQL database for storing rules and evaluation results.
-Contributing
+
+
+
+**Contributing**
 We welcome contributions! To contribute:
 
 
