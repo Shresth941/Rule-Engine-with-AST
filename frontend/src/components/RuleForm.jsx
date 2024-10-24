@@ -2,8 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { TextField, Button, Paper, List, ListItem, ListItemText, IconButton, Typography, Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { SvgIcon } from '@mui/material';
 
 const RuleForm = () => {
   const [ruleString, setRuleString] = useState('');
@@ -13,17 +12,30 @@ const RuleForm = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [deleteRuleId, setDeleteRuleId] = useState(null);
 
+  const EditIcon = (props) => (
+    <SvgIcon {...props}>
+      <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a1.003 1.003 0 0 0-1.42 0L15 4.34l3.75 3.75 1.96-1.96z" />
+    </SvgIcon>
+  );
+  
+  const DeleteIcon = (props) => (
+    <SvgIcon {...props}>
+      <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1z" />
+    </SvgIcon>
+  );
+
   useEffect(() => {
-    const fetchRules = async () => {
-      try {
-        const response = await axios.get('https://rule-engine-with-ast-2-myl2.onrender.com/api/rules');
-        setRules(response.data);
-      } catch (error) {
-        console.error('Error fetching rules:', error);
-      }
-    };
-    fetchRules();
+    fetchRules(); // Fetch rules initially when the component loads
   }, []);
+
+  const fetchRules = async () => {
+    try {
+      const response = await axios.get('https://rule-engine-with-ast-2-myl2.onrender.com/api/rules');
+      setRules(response.data);
+    } catch (error) {
+      console.error('Error fetching rules:', error);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,12 +47,12 @@ const RuleForm = () => {
     setRuleString('');
     setIsEditing(false);
     setEditRuleId(null);
+    fetchRules(); // Re-fetch rules after form submission
   };
 
   const createNewRule = async () => {
     try {
-      const response = await axios.post('https://rule-engine-with-ast-2-myl2.onrender.com/api/rules/create', { ruleString });
-      setRules([...rules, response.data]);
+      await axios.post('https://rule-engine-with-ast-2-myl2.onrender.com/api/rules/create', { ruleString });
     } catch (error) {
       console.error('Error creating rule:', error);
     }
@@ -59,8 +71,8 @@ const RuleForm = () => {
   const handleDeleteRule = async () => {
     try {
       await axios.delete(`https://rule-engine-with-ast-2-myl2.onrender.com/api/rules/delete/${deleteRuleId}`);
-      setRules(rules.filter((rule) => rule._id !== deleteRuleId));
       handleCloseDialog();
+      fetchRules(); // Re-fetch rules after deletion
     } catch (error) {
       console.error('Error deleting rule:', error);
     }
@@ -74,8 +86,7 @@ const RuleForm = () => {
 
   const handleUpdateRule = async () => {
     try {
-      const response = await axios.put(`https://rule-engine-with-ast-2-myl2.onrender.com/api/rules/update/${editRuleId}`, { ruleString });
-      setRules(rules.map((rule) => (rule._id === editRuleId ? response.data.rule : rule)));
+      await axios.put(`https://rule-engine-with-ast-2-myl2.onrender.com/api/rules/update/${editRuleId}`, { ruleString });
     } catch (error) {
       console.error('Error updating rule:', error);
     }
@@ -134,10 +145,7 @@ const RuleForm = () => {
         </Box>
       )}
 
-      <Dialog
-        open={openDialog}
-        onClose={handleCloseDialog}
-      >
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
         <DialogTitle>Confirm Deletion</DialogTitle>
         <DialogContent>
           <DialogContentText>Are you sure you want to delete this rule?</DialogContentText>

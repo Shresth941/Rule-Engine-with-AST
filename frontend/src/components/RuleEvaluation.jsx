@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  TextField, Button, Box, Snackbar, Alert, 
+  TextField, Button,  Snackbar, Alert, 
   MenuItem, Card, CardContent, Typography, Grid, Paper, CircularProgress 
 } from '@mui/material';
-import { Rule, CheckCircle, Error } from '@mui/icons-material';
+import { SvgIcon } from '@mui/material';
 import axios from 'axios';
 
 const EvaluationForm = ({ rules }) => {
@@ -15,7 +15,23 @@ const EvaluationForm = ({ rules }) => {
   const [evaluationResult, setEvaluationResult] = useState(null);
   const [validRules, setValidRules] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const RuleIcon = (props) => (
+    <SvgIcon {...props}>
+      <path d="M0 0h24v24H0z" fill="none" />
+      <path d="M16 13H8v-2h8v2zm0-4H8V7h8v2zm0 8H8v-2h8v2zM6 19h12v2H6zm0-4h2v2H6zm0-4h2v2H6zm0-4h2v2H6zm0-4h2v2H6z" />
+    </SvgIcon>
+  );
+  const CheckCircleIcon = (props) => (
+    <SvgIcon {...props}>
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z" />
+    </SvgIcon>
+  );
+  const ErrorIcon = (props) => (
+    <SvgIcon {...props}>
+      <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
+    </SvgIcon>
+  );
+    
   useEffect(() => {
     if (rules && Array.isArray(rules)) {
       const filteredRules = rules.filter(rule => rule.rootNode); // Filter only valid rules
@@ -83,7 +99,7 @@ const EvaluationForm = ({ rules }) => {
             variant="outlined"
             helperText="Please choose a rule to evaluate"
             InputProps={{
-              startAdornment: <Rule sx={{ mr: 1 }} />,
+              startAdornment: <RuleIcon sx={{ mr: 1 }} />,
             }}
           >
             {validRules.map((rule) => (
@@ -144,7 +160,7 @@ const EvaluationForm = ({ rules }) => {
               align="center"
               sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
-              {success ? <CheckCircle sx={{ mr: 1 }} /> : <Error sx={{ mr: 1 }} />}
+              {success ? <CheckCircleIcon sx={{ mr: 1 }} /> : <ErrorIcon sx={{ mr: 1 }} />}
               {message}
             </Typography>
           </CardContent>

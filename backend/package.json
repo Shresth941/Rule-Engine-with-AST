@@ -6,7 +6,11 @@
   "type": "module",
   "scripts": {
     "server": "nodemon server.js",
+<<<<<<< HEAD
     "build": "npm rebuild bcrypt --build-from-source"
+=======
+     "build": "npm rebuild bcrypt --build-from-source"
+>>>>>>> 7980ea88210af967d2b0a8fbf6761f7a958621de
   },
   "keywords": [],
   "author": "",
