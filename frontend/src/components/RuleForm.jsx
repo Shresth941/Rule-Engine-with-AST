@@ -16,7 +16,7 @@ const RuleForm = () => {
   useEffect(() => {
     const fetchRules = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/rules');
+        const response = await axios.get('https://rule-engine-with-ast-2-myl2.onrender.com/api/rules');
         setRules(response.data);
       } catch (error) {
         console.error('Error fetching rules:', error);
@@ -39,7 +39,7 @@ const RuleForm = () => {
 
   const createNewRule = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/rules/create', { ruleString });
+      const response = await axios.post('https://rule-engine-with-ast-2-myl2.onrender.com/api/rules/create', { ruleString });
       setRules([...rules, response.data]);
     } catch (error) {
       console.error('Error creating rule:', error);
@@ -58,7 +58,7 @@ const RuleForm = () => {
 
   const handleDeleteRule = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/rules/delete/${deleteRuleId}`);
+      await axios.delete(`https://rule-engine-with-ast-2-myl2.onrender.com/api/rules/delete/${deleteRuleId}`);
       setRules(rules.filter((rule) => rule._id !== deleteRuleId));
       handleCloseDialog();
     } catch (error) {
@@ -74,7 +74,7 @@ const RuleForm = () => {
 
   const handleUpdateRule = async () => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/rules/update/${editRuleId}`, { ruleString });
+      const response = await axios.put(`https://rule-engine-with-ast-2-myl2.onrender.com/api/rules/update/${editRuleId}`, { ruleString });
       setRules(rules.map((rule) => (rule._id === editRuleId ? response.data.rule : rule)));
     } catch (error) {
       console.error('Error updating rule:', error);

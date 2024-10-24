@@ -33,7 +33,7 @@ const RuleList = () => {
 
   const fetchRules = async () => {
     try {
-      const { data } = await axios.get('http://localhost:5000/api/rules');
+      const { data } = await axios.get('https://rule-engine-with-ast-2-myl2.onrender.com/api/rules');
       setRules(data);
       setError('');
     } catch (err) {
@@ -50,7 +50,7 @@ const RuleList = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/rules/delete/${selectedRule._id}`);
+      await axios.delete(`https://rule-engine-with-ast-2-myl2.onrender.com/api/rules/delete/${selectedRule._id}`);
       setSnackbarMessage('Rule deleted successfully!');
       fetchRules();
     } catch {
@@ -68,7 +68,7 @@ const RuleList = () => {
 
   const handleSaveClick = async (id) => {
     try {
-      await axios.put(`http://localhost:5000/api/rules/update/${id}`, { ruleString: editedRule });
+      await axios.put(`https://rule-engine-with-ast-2-myl2.onrender.com/api/rules/update/${id}`, { ruleString: editedRule });
       setSnackbarMessage('Rule updated successfully!');
       fetchRules();
     } catch {

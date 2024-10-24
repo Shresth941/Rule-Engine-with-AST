@@ -12,7 +12,7 @@ const App = () => {
   useEffect(() => {
     const fetchRules = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/rules');
+        const { data } = await axios.get('https://rule-engine-with-ast-2-myl2.onrender.com/api/rules');
         setRules(data);
       } catch (error) {
         console.error('Error fetching rules:', error);

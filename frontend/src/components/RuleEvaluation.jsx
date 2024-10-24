@@ -40,7 +40,7 @@ const EvaluationForm = ({ rules }) => {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/rules/evaluate', {
+      const response = await axios.post('https://rule-engine-with-ast-2-myl2.onrender.com/api/rules/evaluate', {
         ast: selectedRule.rootNode,
         userData,
       });
